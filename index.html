@@ -1,0 +1,93 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style2.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="ui-bootstrap-tpls-2.5.0.min.js"></script>	
+
+	<title>Crypto</title>
+</head>
+<body ng-app="myapp" ng-controller="mycntrl" >
+	
+	<header>Cryptopedia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.html" ><span class="buttons">Home</span></a><a href="about.html"><span class="buttons">about</span></a><a href="contactus.html"><span class="buttons">contact us</span></a><input placeholder=""type="text" ng-model="val" id="input"> </header>
+	<div id="sidebar">
+	
+		<marquee direction="up" scrollamount="15" height="700px"  onmouseover="this.stop()" onmouseout="this.start()"><div id="sidebox" ng-repeat="x in coins">Rank :<span >{{x.rank}}</span>	</br></br>			
+	Name :<span>{{x.name}}({{x.symbol}})</span></br></br>	
+	Price :<span>{{x.price_usd|currency}}</span></br></br>	
+	Change :<span  ng-if="x.percent_change_7d<0" ng-style="red">{{x.percent_change_7d}}</span><span  ng-if="x.percent_change_7d>0" ng-style="green">{{x.percent_change_7d}}</span></br></br>	
+	Market Cap :<span>{{x.market_cap_usd|currency}}</span></br></br>
+	BTC Equivalent :<span>{{x.price_btc}}</span></marquee>
+	</div>
+	<div id="bigbox">
+
+			<div id="box" style="background:url('128/icon/{{x.symbol}}.png');	background-repeat:no-repeat;  background-position:right top;"ng-repeat="x in coins" >
+	Rank :<span >{{x.rank}}</span>	</br></br>			
+	Name :<span>{{x.name}}({{x.symbol}})</span></br></br>	
+	Price :<span ng-if="(money!='$')&&(money!='₹')&&(money!='€')&&(money!='£')&&(money!='￥')&&(money!='₱')&&(money!='Sfr')&&(money!='CAD')">{{x.price_usd|currency:money}}</span><span ng-if="money=='$'">{{x.price_usd|currency:money}}</span><span ng-if="money=='₹'">{{(x.price_usd)*64.61|currency:money}}</span><span ng-if="money=='€'">{{(x.price_usd)*0.81|currency:money}}</span><span ng-if="money=='£'">{{(x.price_usd)*0.72|currency:money}}</span><span ng-if="money=='￥'">{{(x.price_usd)*106.84|currency:money}}</span><span ng-if="money=='₱'">{{(x.price_usd)*18.55|currency:money}}</span><span ng-if="money=='Sfr'">{{(x.price_usd)*0.93|currency:money}}</span><span ng-if="money=='CAD'">{{(x.price_usd)*1.27|currency:$}}</span></br></br>
+	Change :<span  ng-if="x.percent_change_7d<0" ng-style="red">{{x.percent_change_7d}}</span><span  ng-if="x.percent_change_7d>0" ng-style="green">{{x.percent_change_7d}}</span></br></br>	
+	Market Cap :<span ng-if="(money!='$')&&(money!='₹')&&(money!='€')&&(money!='£')&&(money!='￥')&&(money!='₱')&&(money!='CAD')">{{x.market_cap_usd|currency:money}}</span><span ng-if="money=='$'">{{x.market_cap_usd|currency:money}}</span><span ng-if="money=='₹'">{{(x.market_cap_usd)*64.61|currency:money}}</span><span ng-if="money=='€'">{{(x.market_cap_usd)*0.81|currency:money}}</span><span ng-if="money=='£'">{{(x.market_cap_usd)*0.72|currency:money}}</span><span ng-if="money=='￥'">{{(x.market_cap_usd)*106.84|currency:money}}</span><span ng-if="money=='₱'">{{(x.market_cap_usd)*18.55|currency:money}}</span><span ng-if="money=='CAD'">{{(x.market_cap_usd)*1.27|currency:$}}</span></br></br>
+	BTC Equivalent :<span>{{x.price_btc}}</span></br>
+	<select  ng-model="money"	ng-options="x for x in currencies" ></select>
+	</div>
+	</div></div>
+	
+	<div id="modal" ng-if="(val==(x.name|lowercase))||(val==(x.name|uppercase))||(val==(x.name))||(val==(x.symbol|lowercase))||(val==(x.symbol|uppercase))" ng-style="modalshow" ng-click="close()" ng-repeat="x in coins|limitTo:pageSize">
+	</div>
+	<div id="modalcontent" ng-if="(val==(x.name|lowercase))||(val==(x.name|uppercase))||(val==(x.name))||(val==(x.symbol|lowercase))||(val==(x.symbol|uppercase))" ng-style="match"   ng-repeat="x in coins|limitTo:pageSize">
+		
+		<div id="modalheader"><span id="close" ng-click="close()">&times;</span><h2>{{val}}</h2></div>
+			<div id="modalbody"	>
+	Rank :<span >{{x.rank}}</span>	</br></br>			
+	Name :<span>{{x.name}}({{x.symbol}})</span></br></br>	
+	Price :<span>{{x.price_usd|currency}}</span></br></br>	
+	Change :<span  ng-if="x.percent_change_7d<0" ng-style="red">{{x.percent_change_7d}}</span><span  ng-if="x.percent_change_7d>0" ng-style="green">{{x.percent_change_7d}}</span></br></br>	
+	Market Cap :<span>{{x.market_cap_usd|currency}}</span></br></br>
+	BTC Equivalent :<span>{{x.price_btc}}</span>
+		
+		</div>
+			
+		</div>	
+		<footer> © Copyright 2018 cryptopedia. All rights reserved.</footer>
+
+	<script>
+
+
+
+	var app=angular.module("myapp",["ui.bootstrap"]);
+		app.controller("mycntrl",function($scope,$http){
+		$scope.currencies=["$","₹","€","£","¥","₱","CAD"];
+		$http.get("https://api.coinmarketcap.com/v1/ticker/").then(function(response){
+				$scope.coins=response.data;
+				$scope.green={"color":"green"};
+				$scope.red={"color":"red"};
+				$scope.match={"background-color":"white",
+								"position":"fixed",
+								"left":"500px",
+								"top":"100px",
+								"width":"400px",
+								"height":"400px",
+								"border-radius":"10px",
+								"padding":"10px",
+						
+								};
+				$scope.modalshow={	
+									"height":"100%",	
+									"width":"100%",		
+									"background-color":"rgba(0,0,0,0.4)",
+									"position":"fixed",	
+									"top":"0px",
+									"left":"0px",
+									"display":"block"};
+				$scope.close=function(){
+				$scope.val=" ";
+				}
+
+		});
+	
+		});
+	
+		
+    </script>
+</body>
+
+</html>
