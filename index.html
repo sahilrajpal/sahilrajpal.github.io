@@ -20,7 +20,7 @@
 	</div>
 	<div id="bigbox">
 
-			<div id="box" style="background:url('https://sahilrajpal.github.io/128/icon/act.png');	background-repeat:no-repeat;  background-position:right top;"ng-repeat="x in coins" >
+			<div id="box" style="background:url('https://sahilrajpal.github.io/128/icon/{{x.symbol}}.png');	background-repeat:no-repeat;  background-position:right top;"ng-repeat="x in coins" >
 	Rank :<span >{{x.rank}}</span>	</br></br>			
 	Name :<span>{{x.name}}({{x.symbol}})</span></br></br>	
 	Price :<span ng-if="(money!='$')&&(money!='₹')&&(money!='€')&&(money!='£')&&(money!='￥')&&(money!='₱')&&(money!='Sfr')&&(money!='CAD')">{{x.price_usd|currency:money}}</span><span ng-if="money=='$'">{{x.price_usd|currency:money}}</span><span ng-if="money=='₹'">{{(x.price_usd)*64.61|currency:money}}</span><span ng-if="money=='€'">{{(x.price_usd)*0.81|currency:money}}</span><span ng-if="money=='£'">{{(x.price_usd)*0.72|currency:money}}</span><span ng-if="money=='￥'">{{(x.price_usd)*106.84|currency:money}}</span><span ng-if="money=='₱'">{{(x.price_usd)*18.55|currency:money}}</span><span ng-if="money=='Sfr'">{{(x.price_usd)*0.93|currency:money}}</span><span ng-if="money=='CAD'">{{(x.price_usd)*1.27|currency:$}}</span></br></br>
